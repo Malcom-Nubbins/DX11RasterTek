@@ -165,7 +165,7 @@ void SystemClass::InitWindows(int& screenWidth, int& screenHeight)
 
 	_appName = L"DX11 Proj";
 
-	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = WndProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
@@ -173,7 +173,7 @@ void SystemClass::InitWindows(int& screenWidth, int& screenHeight)
 	wc.hIcon = LoadIcon(nullptr, IDI_WINLOGO);
 	wc.hIconSm = wc.hIcon;
 	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 2);
 	wc.lpszMenuName = nullptr;
 	wc.lpszClassName = _appName;
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -205,14 +205,14 @@ void SystemClass::InitWindows(int& screenWidth, int& screenHeight)
 		posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
 	}
 
-	_hWnd = CreateWindowEx(WS_EX_APPWINDOW, _appName, _appName, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP,
-		posX, posY, screenWidth, screenHeight, nullptr, nullptr, _hInstance, nullptr);
+	_hWnd = CreateWindowEx(0, _appName, _appName, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+		CW_USEDEFAULT, screenWidth, screenHeight, nullptr, nullptr, _hInstance, nullptr);
 
 	ShowWindow(_hWnd, SW_SHOW);
-	SetForegroundWindow(_hWnd);
-	SetFocus(_hWnd);
-
-	ShowCursor(false);
+	//SetForegroundWindow(_hWnd);
+	//SetFocus(_hWnd);
+	UpdateWindow(_hWnd);
+	//ShowCursor(false);
 
 	return;
 }

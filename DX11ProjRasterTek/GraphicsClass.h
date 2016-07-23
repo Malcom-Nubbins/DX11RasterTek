@@ -2,9 +2,12 @@
 #include <Windows.h>
 
 #include "d3dClass.h"
+#include "CameraClass.h"
+#include "ModelClass.h"
+#include "ColorShaderClass.h"
 
-const bool FULL_SCREEN = true;
-const bool VSYNC_ENABLED = true;
+const bool FULL_SCREEN = false;
+const bool VSYNC_ENABLED = false;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
 class GraphicsClass
@@ -23,5 +26,8 @@ private:
 
 private:
 	d3dClass* _direct3D;
+	CameraClass* _camera;
+	ModelClass* _model;
+	ColorShaderClass* _colorShader;
 };
 
