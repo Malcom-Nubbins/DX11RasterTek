@@ -1,17 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="BaseSystem">
+      <UniqueIdentifier>{5a3d0281-810c-498b-8985-14ba6c833b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Input">
+      <UniqueIdentifier>{7a00eacb-f16b-4cbe-89a0-219d4d4db6af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics">
+      <UniqueIdentifier>{7209dc87-300d-4c63-8ad3-0f5bb2063f1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\D3D">
+      <UniqueIdentifier>{fb1034e5-2a9e-4101-a70b-6daa6bd97704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\ModelClass">
+      <UniqueIdentifier>{08a4b3ef-b7cc-4b8b-9850-76e01d471079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\CameraClass">
+      <UniqueIdentifier>{b2dd02c9-4d75-41d3-b475-2ed342af1698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\ColourShaderClass">
+      <UniqueIdentifier>{1842630a-1dd3-486f-bf31-68ef8a73eec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Shaders">
+      <UniqueIdentifier>{ae2fb3c8-5041-4d65-b3e0-71343f5de738}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>BaseSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>BaseSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputClass.cpp">
+      <Filter>BaseSystem\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsClass.cpp">
+      <Filter>BaseSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dClass.cpp">
+      <Filter>BaseSystem\Graphics\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelClass.cpp">
+      <Filter>BaseSystem\Graphics\ModelClass</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>BaseSystem\Graphics\CameraClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorShaderClass.cpp">
+      <Filter>BaseSystem\Graphics\ColourShaderClass</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SystemClass.h">
+      <Filter>BaseSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputClass.h">
+      <Filter>BaseSystem\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsClass.h">
+      <Filter>BaseSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dClass.h">
+      <Filter>BaseSystem\Graphics\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelClass.h">
+      <Filter>BaseSystem\Graphics\ModelClass</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraClass.h">
+      <Filter>BaseSystem\Graphics\CameraClass</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ColorShaderClass.h">
+      <Filter>BaseSystem\Graphics\ColourShaderClass</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DX11ProjRasterTek.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="colorVS.hlsl">
+      <Filter>BaseSystem\Shaders</Filter>
+    </None>
+    <None Include="colorPS.hlsl">
+      <Filter>BaseSystem\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
