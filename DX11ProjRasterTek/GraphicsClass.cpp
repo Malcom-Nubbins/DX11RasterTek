@@ -7,7 +7,8 @@ GraphicsClass::GraphicsClass()
 	_direct3D = 0;
 	_camera = 0;
 	_model = 0;
-	_colorShader = 0;
+	_shader = 0;
+	_light = 0;
 }
 
 GraphicsClass::GraphicsClass(const GraphicsClass &)
@@ -44,34 +45,47 @@ bool GraphicsClass::Init(int screenWidth, int screenHeight, HWND hwnd)
 	if (!_model)
 		return false;
 
-	result = _model->Init(_direct3D->GetDevice());
+	result = _model->Init(_direct3D->GetDevice(), _direct3D->GetDeviceContext(), "Textures/grass.tga");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not init model", L"Error", MB_OK);
 		return false;
 	}
 
-	_colorShader = new ColorShaderClass();
-	if (!_colorShader)
+	_shader = new ShaderClass();
+	if (!_shader)
 		return false;
 
-	result = _colorShader->Init(_direct3D->GetDevice(), hwnd);
+	result = _shader->Init(_direct3D->GetDevice(), hwnd);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not init shader object", L"Error", MB_OK);
 		return false;
 	}
 
+	_light = new LightClass();
+	if (!_light)
+		return false;
+
+	_light->SetDiffuseColour(XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f));
+	_light->SetLightDirection(XMFLOAT3(0.0f, 0.0f, 1.0f));
+
 	return true;
 }
 
 void GraphicsClass::Shutdown()
 {
-	if (_colorShader)
+	if (_light)
 	{
-		_colorShader->Shutdown();
-		delete _colorShader;
-		_colorShader = 0;
+		delete _light;
+		_light = 0;
+	}
+
+	if (_shader)
+	{
+		_shader->Shutdown();
+		delete _shader;
+		_shader = 0;
 	}
 
 	// Release the model object.
@@ -103,14 +117,22 @@ bool GraphicsClass::Frame()
 {
 	bool result;
 
-	result = Render();
+	static float rotation = 0.0f;
+
+	rotation += (float)XM_PI * 0.01f;
+	if (rotation > 360.0f)
+	{
+		rotation -= 360.0f;
+	}
+
+	result = Render(rotation);
 	if (!result)
 		return false;
 
 	return true;
 }
 
-bool GraphicsClass::Render()
+bool GraphicsClass::Render(float rotation)
 {
 	XMMATRIX world, view, proj;
 	bool result;
@@ -123,9 +145,11 @@ bool GraphicsClass::Render()
 	_camera->GetViewMatrix(view);
 	_direct3D->GetProjMat(proj);
 
+	//XMMatrixRotationY(rotation);
+
 	_model->Render(_direct3D->GetDeviceContext());
 
-	result = _colorShader->Render(_direct3D->GetDeviceContext(), _model->GetIndexCount(), world, view, proj);
+	result = _shader->Render(_direct3D->GetDeviceContext(), _model->GetIndexCount(), world, view, proj, _model->GetTexture(), _light->GetDiffuseColour(), _light->GetLightDirection());
 	if (!result)
 		return false;
 

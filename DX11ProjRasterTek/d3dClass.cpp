@@ -105,8 +105,17 @@ bool d3dClass::Init(int width, int height, bool vsync, HWND hwnd, bool fullscr, 
 	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
 
 	swapChainDesc.BufferCount = 1;
-	swapChainDesc.BufferDesc.Width = width;
-	swapChainDesc.BufferDesc.Height = height;
+	if (fullscr)
+	{
+		swapChainDesc.BufferDesc.Width = 1920;
+		swapChainDesc.BufferDesc.Height = 1080;
+	}
+	else
+	{
+		swapChainDesc.BufferDesc.Width = width;
+		swapChainDesc.BufferDesc.Height = height;
+	}
+
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
 	if (_vsync)
@@ -219,7 +228,7 @@ bool d3dClass::Init(int width, int height, bool vsync, HWND hwnd, bool fullscr, 
 	rasterDesc.DepthClipEnable = true;
 	rasterDesc.FillMode = D3D11_FILL_SOLID;
 	rasterDesc.FrontCounterClockwise = false;
-	rasterDesc.MultisampleEnable = false;
+	rasterDesc.MultisampleEnable = true;
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
 

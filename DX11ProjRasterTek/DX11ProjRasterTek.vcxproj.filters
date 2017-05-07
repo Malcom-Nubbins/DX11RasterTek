@@ -23,11 +23,17 @@
     <Filter Include="BaseSystem\Graphics\CameraClass">
       <UniqueIdentifier>{b2dd02c9-4d75-41d3-b475-2ed342af1698}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseSystem\Graphics\ColourShaderClass">
-      <UniqueIdentifier>{1842630a-1dd3-486f-bf31-68ef8a73eec7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="BaseSystem\Shaders">
       <UniqueIdentifier>{ae2fb3c8-5041-4d65-b3e0-71343f5de738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\ModelClass\TextureClass">
+      <UniqueIdentifier>{5c440178-bea4-4dee-87d1-a1709abc5ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\ShaderClass">
+      <UniqueIdentifier>{6f90ad66-d69b-44d6-97a5-81976b19d114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\Graphics\LightClass">
+      <UniqueIdentifier>{5479bc7e-1804-431e-aaee-a885bc312add}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,8 +58,14 @@
     <ClCompile Include="CameraClass.cpp">
       <Filter>BaseSystem\Graphics\CameraClass</Filter>
     </ClCompile>
-    <ClCompile Include="ColorShaderClass.cpp">
-      <Filter>BaseSystem\Graphics\ColourShaderClass</Filter>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>BaseSystem\Graphics\ModelClass\TextureClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderClass.cpp">
+      <Filter>BaseSystem\Graphics\ShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="LightClass.cpp">
+      <Filter>BaseSystem\Graphics\LightClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,8 +88,14 @@
       <Filter>BaseSystem\Graphics\CameraClass</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ColorShaderClass.h">
-      <Filter>BaseSystem\Graphics\ColourShaderClass</Filter>
+    <ClInclude Include="TextureClass.h">
+      <Filter>BaseSystem\Graphics\ModelClass\TextureClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderClass.h">
+      <Filter>BaseSystem\Graphics\ShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="LightClass.h">
+      <Filter>BaseSystem\Graphics\LightClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,11 +104,11 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="colorVS.hlsl">
+    <FxCompile Include="Shaders\PixelShader.hlsl">
       <Filter>BaseSystem\Shaders</Filter>
-    </None>
-    <None Include="colorPS.hlsl">
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexShader.hlsl">
       <Filter>BaseSystem\Shaders</Filter>
-    </None>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ ModelClass::ModelClass()
 {
 	_vertexBuffer = 0;
 	_indexBuffer = 0;
+	_texture = 0;
 }
 
 ModelClass::ModelClass(const ModelClass & other)
@@ -16,11 +17,15 @@ ModelClass::~ModelClass()
 {
 }
 
-bool ModelClass::Init(ID3D11Device * device)
+bool ModelClass::Init(ID3D11Device * device, ID3D11DeviceContext* context, char* filename)
 {
 	bool result;
 
 	result = InitBuffers(device);
+	if (!result)
+		return false;
+
+	result = LoadTexture(device, context, filename);
 	if (!result)
 		return false;
 
@@ -29,8 +34,9 @@ bool ModelClass::Init(ID3D11Device * device)
 
 void ModelClass::Shutdown()
 {
+	ReleaseTexture();
 	ShutdownBuffers();
-
+	
 	return;
 }
 
@@ -66,13 +72,16 @@ bool ModelClass::InitBuffers(ID3D11Device * device)
 		return false;
 
 	vertices[0].pos = XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[0].texture = XMFLOAT2(0.0f, 1.0f);
+	vertices[0].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
 	vertices[1].pos = XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
-	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[1].texture = XMFLOAT2(0.5f, 0.0f);
+	vertices[1].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
 	vertices[2].pos = XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
-	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[2].texture = XMFLOAT2(1.0f, 1.0f);
+	vertices[2].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
 	// Load the index array with data.
 	indices[0] = 0;  // Bottom left.
@@ -164,6 +173,33 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext * deviceContext)
 
 	// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	return;
+}
+
+bool ModelClass::LoadTexture(ID3D11Device * device, ID3D11DeviceContext * context, char * filename)
+{
+	bool result;
+
+	_texture = new TextureClass();
+	if (!_texture)
+		return false;
+
+	result = _texture->Init(device, context, filename);
+	if (!result)
+		return false;
+
+	return true;
+}
+
+void ModelClass::ReleaseTexture()
+{
+	if (_texture)
+	{
+		_texture->Shutdown();
+		delete _texture;
+		_texture = 0;
+	}
 
 	return;
 }
