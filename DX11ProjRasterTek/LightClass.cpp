@@ -2,8 +2,8 @@
 
 LightClass::LightClass()
 {
-	/*_diffuse = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
-	_direction = XMFLOAT3(0.0f, 0.0f, 0.0f);*/
+	_diffuse = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
+	_direction = XMFLOAT3(0.0f, 0.0f, 0.0f);
 }
 
 LightClass::LightClass(const LightClass & other)

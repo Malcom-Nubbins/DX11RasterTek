@@ -119,7 +119,7 @@ bool GraphicsClass::Frame()
 
 	static float rotation = 0.0f;
 
-	rotation += (float)XM_PI * 0.01f;
+	rotation += (float)XM_PI * 0.001f;
 	if (rotation > 360.0f)
 	{
 		rotation -= 360.0f;
@@ -145,7 +145,7 @@ bool GraphicsClass::Render(float rotation)
 	_camera->GetViewMatrix(view);
 	_direct3D->GetProjMat(proj);
 
-	//XMMatrixRotationY(rotation);
+	world = XMMatrixRotationY(rotation);
 
 	_model->Render(_direct3D->GetDeviceContext());
 

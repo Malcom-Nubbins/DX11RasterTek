@@ -22,7 +22,7 @@ float4 main(PixelInputType input) : SV_TARGET
     float lightIntensity;
     float4 colour;
 
-    input.normal = normalize(input.normal);
+    //input.normal = normalize(input.normal);
 
     textureColour = shaderTexture.Sample(SampleType, input.tex);
 
@@ -34,5 +34,5 @@ float4 main(PixelInputType input) : SV_TARGET
 
     colour = colour * textureColour;
 
-	return textureColour;
+	return colour;
 }
